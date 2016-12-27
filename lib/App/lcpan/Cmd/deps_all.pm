@@ -25,11 +25,13 @@ _
         %App::lcpan::rdeps_phase_args,
         %App::lcpan::rdeps_rel_args,
         module => {
-            schema => 'perl::modname*',
+            summary => 'Module name (can contain % for SQL LIKE query)',
+            schema => 'str*',
             tags => ['category:filtering'],
         },
         dist => {
-            schema => 'perl::distname*',
+            summary => 'Distribution name (can contain % for SQL LIKE query)',
+            schema => 'str*',
             tags => ['category:filtering'],
         },
         module_author => {
@@ -54,7 +56,11 @@ sub handle_cmd {
     my @binds  = ();
 
     if ($args{module}) {
-        push @wheres, "m.name=?";
+        if ($args{module} =~ /%/) {
+            push @wheres, "m.name LIKE ?";
+        } else {
+            push @wheres, "m.name=?";
+        }
         push @binds, $args{module};
     }
     if ($args{module_author}) {
@@ -62,7 +68,11 @@ sub handle_cmd {
         push @binds, uc $args{module_author};
     }
     if ($args{dist}) {
-        push @wheres, "d.name=?";
+        if ($args{dist} =~ /%/) {
+            push @wheres, "d.name LIKE ?";
+        } else {
+            push @wheres, "d.name=?";
+        }
         push @binds, $args{dist};
     }
     if ($args{dist_author}) {
