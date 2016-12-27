@@ -22,8 +22,8 @@ distribution name, so you can view all dependencies in the `dep` table.
 
 _
     args => {
-        %App::lcpan::deps_phase_args,
-        %App::lcpan::deps_rel_args,
+        %App::lcpan::rdeps_phase_args,
+        %App::lcpan::rdeps_rel_args,
         module => {
             schema => 'perl::modname*',
             tags => ['category:filtering'],
