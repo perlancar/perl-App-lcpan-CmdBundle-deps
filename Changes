@@ -1,5 +1,13 @@
 Revision history for App-lcpan-CmdBundle-deps
 
+0.003   2016-12-28 (PERLANCAR)
+
+	- [dist] Fix expressing follow-spec prereq relationship with
+	  x_spec.
+
+	- deps-all: Allow % in --phase and --rel.
+
+
 0.002   2016-12-27 (PERLANCAR)
 
 	- deps-all: Allow SQL LIKE query for --dist and --module when they
