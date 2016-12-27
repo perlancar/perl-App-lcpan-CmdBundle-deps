@@ -8,6 +8,8 @@ use strict;
 use warnings;
 use Log::Any::IfLOG '$log';
 
+use Clone::Util qw(modclone);
+
 require App::lcpan;
 
 our %SPEC;
@@ -22,8 +24,14 @@ distribution name, so you can view all dependencies in the `dep` table.
 
 _
     args => {
-        %App::lcpan::rdeps_phase_args,
-        %App::lcpan::rdeps_rel_args,
+        %{( modclone {
+            # can contain %, so anything
+            delete $_->{phase}{schema}[1]{match};
+        } \%App::lcpan::rdeps_phase_args )},
+        %{( modclone {
+            # can contain %, so anything
+            delete $_->{rel}{schema}[1]{match};
+        } \%App::lcpan::rdeps_rel_args )},
         module => {
             summary => 'Module name (can contain % for SQL LIKE query)',
             schema => 'str*',
@@ -80,11 +88,19 @@ sub handle_cmd {
         push @binds, uc $args{dist_author};
     }
     if ($args{phase} && $args{phase} ne 'ALL') {
-        push @wheres, "phase=?";
+        if ($args{phase} =~ /%/) {
+            push @wheres, "phase LIKE ?";
+        } else {
+            push @wheres, "phase=?";
+        }
         push @binds, $args{phase};
     }
     if ($args{rel} && $args{rel} ne 'ALL') {
-        push @wheres, "rel=?";
+        if ($args{phase} =~ /%/) {
+            push @wheres, "rel LIKE ?";
+        } else {
+            push @wheres, "rel=?";
+        }
         push @binds, $args{rel};
     }
 
