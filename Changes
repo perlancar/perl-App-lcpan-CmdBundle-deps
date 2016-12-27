@@ -1,5 +1,11 @@
 Revision history for App-lcpan-CmdBundle-deps
 
+0.002   2016-12-27 (PERLANCAR)
+
+	- deps-all: Allow SQL LIKE query for --dist and --module when they
+          contain %, fix SQL, change default of --phase & --rel to ALL.
+
+
 0.001   2016-12-27 (PERLANCAR)
 
         - First release.
