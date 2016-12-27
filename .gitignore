@@ -1,0 +1,4 @@
+App-lcpan-CmdBundle-deps-*
+.build
+*~
+nytprof*
