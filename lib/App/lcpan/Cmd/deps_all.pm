@@ -62,7 +62,7 @@ sub handle_cmd {
         push @binds, uc $args{module_author};
     }
     if ($args{dist}) {
-        push @wheres, "dist=?";
+        push @wheres, "d.name=?";
         push @binds, $args{dist};
     }
     if ($args{dist_author}) {
