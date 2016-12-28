@@ -1,5 +1,11 @@
 Revision history for App-lcpan-CmdBundle-deps
 
+0.004   2016-12-28 (PERLANCAR)
+
+	- [Bugfix] deps-all: Fix typo which makes filtering --rel with SQL
+	  LIKE doesn't work.
+
+
 0.003   2016-12-28 (PERLANCAR)
 
 	- [dist] Fix expressing follow-spec prereq relationship with
