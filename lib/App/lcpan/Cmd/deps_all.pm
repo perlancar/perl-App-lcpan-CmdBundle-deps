@@ -96,7 +96,7 @@ sub handle_cmd {
         push @binds, $args{phase};
     }
     if ($args{rel} && $args{rel} ne 'ALL') {
-        if ($args{phase} =~ /%/) {
+        if ($args{rel} =~ /%/) {
             push @wheres, "rel LIKE ?";
         } else {
             push @wheres, "rel=?";
