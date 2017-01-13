@@ -4,7 +4,7 @@ package App::lcpan::CmdBundle::deps;
 # VERSION
 
 1;
-# ABSTRACT: More lcpan subcommands related dependencies
+# ABSTRACT: More lcpan subcommands related to dependencies
 
 =head1 SYNOPSIS
 
