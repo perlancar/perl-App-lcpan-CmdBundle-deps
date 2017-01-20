@@ -1,3 +1,10 @@
+0.005   2017-01-20 (PERLANCAR)
+
+        - No functional changes.
+
+        - [dist] Use Pod::Weaver plugin PWP:App::lcpan.
+
+
 0.004   2016-12-28 (PERLANCAR)
 
 	- [Bugfix] deps-all: Fix typo which makes filtering --rel with SQL
