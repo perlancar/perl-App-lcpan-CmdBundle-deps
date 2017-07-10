@@ -6,7 +6,7 @@ package App::lcpan::Cmd::deps_all;
 use 5.010001;
 use strict;
 use warnings;
-use Log::Any::IfLOG '$log';
+use Log::ger;
 
 use Clone::Util qw(modclone);
 
