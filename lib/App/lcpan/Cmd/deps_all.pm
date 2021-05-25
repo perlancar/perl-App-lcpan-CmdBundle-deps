@@ -1,6 +1,8 @@
 package App::lcpan::Cmd::deps_all;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -16,38 +18,44 @@ our %SPEC;
 
 $SPEC{handle_cmd} = {
     v => 1.1,
-    summary => 'List all dependencies',
+    summary => 'List all (indexed) dependencies',
     description => <<'_',
 
 This subcommand lists dependencies. It does not require you to specify a
-distribution name, so you can view all dependencies in the `dep` table.
+distribution name, so you can view all dependencies in the `dep` table. Only
+"indexed dependencies" are listed though, meaning modules that are currently
+indexed by `02packages.details.txt.gz` and are listed in the `module` table.
+Distributions will sometimes also specify dependencies to modules that are
+(currently) unindexed. To list those, use the `deps-unindexed` subcommand.
 
 _
     args => {
         %{( modclone {
-            # can contain %, so anything
             delete $_->{phase}{schema}[1]{match};
+            $_->{phase}{summary} = 'Phase (can contain % for SQL LIKE query)';
         } \%App::lcpan::rdeps_phase_args )},
         %{( modclone {
-            # can contain %, so anything
             delete $_->{rel}{schema}[1]{match};
+            $_->{phase}{summary} = 'Relationship (can contain % for SQL LIKE query)';
         } \%App::lcpan::rdeps_rel_args )},
         module => {
-            summary => 'Module name (can contain % for SQL LIKE query)',
+            summary => 'Module name that is depended upon (can contain % for SQL LIKE query)',
             schema => 'str*',
             tags => ['category:filtering'],
         },
         dist => {
-            summary => 'Distribution name (can contain % for SQL LIKE query)',
+            summary => 'Distribution name that specifies the dependency (can contain % for SQL LIKE query)',
             schema => 'str*',
             tags => ['category:filtering'],
         },
         module_author => {
+            summary => 'The ID of author that releases the module that is depended upon',
             schema => 'str*',
             completion => \&App::lcpan::_complete_cpanid,
             tags => ['category:filtering'],
         },
         dist_author => {
+            summary => 'The ID of author that releases the distribution that specifies the distribution',
             schema => 'str*',
             completion => \&App::lcpan::_complete_cpanid,
             tags => ['category:filtering'],
