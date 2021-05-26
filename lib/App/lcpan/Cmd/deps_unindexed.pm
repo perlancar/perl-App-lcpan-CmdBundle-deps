@@ -87,6 +87,14 @@ sub handle_cmd {
         if ($args{perl}) { push @wheres, "dep.module_name='perl'" }
         else             { push @wheres, "dep.module_name!='perl'" }
     }
+    if ($args{module}) {
+        if ($args{module} =~ /%/) {
+            push @wheres, "dep.module_name LIKE ?";
+        } else {
+            push @wheres, "dep.module_name=?";
+        }
+        push @binds, $args{module};
+    }
     if ($args{dist}) {
         if ($args{dist} =~ /%/) {
             push @wheres, "df.dist_name LIKE ?";
