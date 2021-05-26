@@ -1,3 +1,13 @@
+0.008   2021-05-26  Released-By: PERLANCAR; Urgency: medium
+
+	- Update to newer lcpan (dist table is gone).
+
+	- Add subcommand: deps-unindexed.
+
+	- [ux] Add wording in argument summary/description to make it clear
+	  which one is dependency, which one is dependeny specifier.
+
+
 0.007   2017-07-28  Released-By: PERLANCAR
 
 	- Add subcommands: deps-phases, deps-rels.
