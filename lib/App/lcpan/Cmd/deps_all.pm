@@ -36,7 +36,7 @@ _
         } \%App::lcpan::rdeps_phase_args )},
         %{( modclone {
             delete $_->{rel}{schema}[1]{match};
-            $_->{phase}{summary} = 'Relationship (can contain % for SQL LIKE query)';
+            $_->{rel}{summary} = 'Relationship (can contain % for SQL LIKE query)';
         } \%App::lcpan::rdeps_rel_args )},
         module => {
             summary => 'Module name that is depended upon (can contain % for SQL LIKE query)',
@@ -85,14 +85,14 @@ sub handle_cmd {
     }
     if ($args{dist}) {
         if ($args{dist} =~ /%/) {
-            push @wheres, "d.name LIKE ?";
+            push @wheres, "df.dist_name LIKE ?";
         } else {
-            push @wheres, "d.name=?";
+            push @wheres, "df.dist_name=?";
         }
         push @binds, $args{dist};
     }
     if ($args{dist_author}) {
-        push @wheres, "d.cpanid=?";
+        push @wheres, "df.cpanid=?";
         push @binds, uc $args{dist_author};
     }
     if ($args{phase} && $args{phase} ne 'ALL') {
@@ -116,13 +116,13 @@ sub handle_cmd {
     my $sth = $dbh->prepare("SELECT
   m.name module,
   m.cpanid module_author,
-  d.name dist,
-  d.cpanid dist_author,
+  df.dist_name dist,
+  df.cpanid dist_author,
   phase,
   rel
 FROM dep
 LEFT JOIN module m ON module_id=m.id
-LEFT JOIN dist d ON dist_id=d.id
+LEFT JOIN file df ON dep.file_id=df.id
 ".
     (@wheres ? "WHERE ".join(" AND ", @wheres) : ""),
                         );
