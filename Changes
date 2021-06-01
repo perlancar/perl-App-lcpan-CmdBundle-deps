@@ -1,3 +1,9 @@
+0.010   2021-06-01  Released-By: PERLANCAR; Urgency: medium
+
+	- [subcommand deps-unindexed][bugfix] Fix swapped logic
+	  --exclude-perl vs --include-perl.
+
+
 0.009   2021-05-26  Released-By: PERLANCAR; Urgency: medium
 
 	- [bugfix] [subcommand deps-unindexed] --module was not observed.
