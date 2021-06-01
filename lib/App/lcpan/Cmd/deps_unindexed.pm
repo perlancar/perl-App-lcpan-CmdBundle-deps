@@ -66,8 +66,8 @@ including ones to 'perl'.
 _
             schema => 'bool*',
             cmdline_aliases => {
-                exclude_perl => {is_flag=>1, summary=>"Equivalent to --perl", code=>sub {$_[0]{perl}=1}},
-                include_perl => {is_flag=>1, summary=>"Equivalent to --no-perl", code=>sub {$_[0]{perl}=0}},
+                exclude_perl => {is_flag=>1, summary=>"Equivalent to --perl", code=>sub {$_[0]{perl}=0}},
+                include_perl => {is_flag=>1, summary=>"Equivalent to --no-perl", code=>sub {$_[0]{perl}=1}},
             },
         },
     },
